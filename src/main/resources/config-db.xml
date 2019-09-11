@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSource" class="atm_xml_config_db.atm.DataSource">
+        <constructor-arg value="customersDB.db"/>
+    </bean>
+    <bean id="bank" class="atm_xml_config_db.atm.Bank">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean id="atm" class="atm_xml_config_db.atm.ATM">
+        <constructor-arg ref="bank"/>
+    </bean>
+    <bean id="atmSimulator" class="atm_xml_config_db.atm.ATMSimulator">
+        <constructor-arg ref="atm"/>
+    </bean>
+</beans>
