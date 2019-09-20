@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSourceClass" class="atm_spring_jdbc.atm.DataSource">
+        <constructor-arg ref="dataSourceDaoImp"/>
+    </bean>
+    <bean id="bank" class="atm_spring_jdbc.atm.Bank">
+        <constructor-arg ref="dataSourceClass"/>
+    </bean>
+    <bean id="atm" class="atm_spring_jdbc.atm.ATM">
+        <constructor-arg ref="bank"/>
+    </bean>
+    <bean id="atmSimulator" class="atm_spring_jdbc.atm.ATMSimulator">
+        <constructor-arg ref="atm"/>
+    </bean>
+
+    <bean id="dataSourceDaoImp" class="atm_spring_jdbc.db.DataSourceDaoImp">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+    <bean id= "jdbcTemplate" class= "org.springframework.jdbc.core.JdbcTemplate">
+        <property name= "dataSource" ref= "sqliteDataSource"/>
+    </bean >
+    <bean id= "sqliteDataSource"
+          class= "org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name= "driverClassName" value= "org.sqlite.JDBC"/>
+        <property name= "url" value= "jdbc:sqlite:customersDB.db"/>
+    </bean >
+</beans>
