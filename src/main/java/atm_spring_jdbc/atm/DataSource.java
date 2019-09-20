@@ -1,12 +1,13 @@
 package atm_spring_jdbc.atm;
 
+import atm_spring_jdbc.db.DataSourceDao;
 import atm_spring_jdbc.db.DataSourceDaoImp;
 
 import java.util.Map;
 
 public class DataSource {
 
-    private DataSourceDaoImp dataSource;
+    private DataSourceDao dataSource;
 
     public DataSource(DataSourceDaoImp dataSource) {
         this.dataSource = dataSource;
